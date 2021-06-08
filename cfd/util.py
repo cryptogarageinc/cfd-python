@@ -538,10 +538,10 @@ class CfdUtil:
         ("CfdAddTxPegoutOutput", c_int, [c_void_p, c_void_p, c_char_p, c_int64, c_int, c_int, c_char_p, c_char_p, c_char_p, c_char_p, c_uint32, c_char_p, c_char_p_p]),  # noqa: E501
         ("CfdCalculateEcSignature", c_int, [c_void_p, c_char_p, c_char_p, c_char_p, c_int, c_bool, c_char_p_p]),  # noqa: E501
         ("CfdVerifyEcSignature", c_int, [c_void_p, c_char_p, c_char_p, c_char_p]),  # noqa: E501
-        ("CfdSignEcdsaAdaptor", c_int, [c_void_p, c_char_p, c_char_p, c_char_p, c_char_p_p, c_char_p_p]),  # noqa: E501
-        ("CfdAdaptEcdsaAdaptor", c_int, [c_void_p, c_char_p, c_char_p, c_char_p_p]),  # noqa: E501
-        ("CfdExtractEcdsaAdaptorSecret", c_int, [c_void_p, c_char_p, c_char_p, c_char_p, c_char_p_p]),  # noqa: E501
-        ("CfdVerifyEcdsaAdaptor", c_int, [c_void_p, c_char_p, c_char_p, c_char_p, c_char_p, c_char_p]),  # noqa: E501
+        ("CfdEncryptEcdsaAdaptor", c_int, [c_void_p, c_char_p, c_char_p, c_char_p, c_char_p_p]),  # noqa: E501
+        ("CfdDecryptEcdsaAdaptor", c_int, [c_void_p, c_char_p, c_char_p, c_char_p_p]),  # noqa: E501
+        ("CfdRecoverEcdsaAdaptor", c_int, [c_void_p, c_char_p, c_char_p, c_char_p, c_char_p_p]),  # noqa: E501
+        ("CfdVerifyEcdsaAdaptor", c_int, [c_void_p, c_char_p, c_char_p, c_char_p, c_char_p]),  # noqa: E501
         ("CfdGetSchnorrPubkeyFromPrivkey", c_int, [c_void_p, c_char_p, c_char_p_p, c_bool_p]),  # noqa: E501
         ("CfdGetSchnorrPubkeyFromPubkey", c_int, [c_void_p, c_char_p, c_char_p_p, c_bool_p]),  # noqa: E501
         ("CfdSchnorrPubkeyTweakAdd", c_int, [c_void_p, c_char_p, c_char_p, c_char_p_p, c_bool_p]),  # noqa: E501
