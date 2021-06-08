@@ -372,8 +372,8 @@
                     "network": "mainnet"
                 },
                 "error": {
-                    "cfd": "ExtPrivkey base58 decode error.",
-                    "python": "ExtPubkey base58 decode error."
+                    "cfd": "Decode base58 error.",
+                    "python": "Decode base58 error."
                 },
                 "memo": "Different APIs are called, which is why the error messages are different."
             },
@@ -486,8 +486,7 @@
                     "hardened": false
                 },
                 "error": {
-                    "python": "ExtPubkey base58 decode error.",
-                    "cfd": "ExtPubkey base58 decode error.",
+                    "cfd": "Decode base58 error.",
                     "json": "Illegal extkey. base58 decode error."
                 }
             },
@@ -684,7 +683,7 @@
                     ]
                 },
                 "error": {
-                    "python": "ExtPubkey base58 decode error.",
+                    "python": "Decode base58 error.",
                     "cfd": "Illegal extkey. base58 decode error."
                 }
             },
@@ -873,7 +872,7 @@
                     "extkey": "Ltpv78nmdb9RW2JVn6dGat5MR1edEbTEXKUPH8gmTKk6o6RTGLJXRjRHvYzW6fWzSbRcf4ydLekAGxWr7NFTgjz9MTnjGhjCocnDqg1uoSyMkKV"
                 },
                 "error": {
-                    "cfd": "ExtPubkey unserialize error."
+                    "cfd": "unsupported extkey version."
                 }
             }
         ]
@@ -1177,8 +1176,8 @@
                     "isCompressed": true
                 },
                 "error": {
-                    "python": "ExtPubkey unserialize error.",
-                    "cfd": "ExtPrivkey unserialize error."
+                    "python": "unsupported extkey version.",
+                    "cfd": "unsupported extkey version."
                 }
             },
             {
@@ -1287,8 +1286,8 @@
                     "network": "regtest"
                 },
                 "error": {
-                    "python": "ExtPubkey unserialize error.",
-                    "cfd": "ExtPrivkey unserialize error."
+                    "python": "unsupported extkey version.",
+                    "cfd": "unsupported extkey version."
                 }
             },
             {

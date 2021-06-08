@@ -7520,7 +7520,7 @@
                         "mainchainGenesisBlockHash": "0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206",
                         "btcAddress": "2MwCVeDphPXwC8o9vfgv4ygV43ZWEX1HePQ",
                         "onlinePubkey": "0214156e4ae9168289b4d0c034da94025121d33ad8643663454885032d77640e3d",
-                        "masterOnlineKey": "2KSW5WTG9n4ZSBijSqa1QFMXzKG2tKsWNhdYzif59TDwL5FQYWZG",
+                        "masterOnlineKey": "L52AgshDAE14NHJuovwAw8hyrTNK4YQjuiPC9EES4sfM7oBPzU4o",
                         "bip32Counter": 0,
                         "whitelist": "030e07d4f657c0c169e04fac5d5a8096adb099874834be59ad1e681e22d952ccda0214156e4ae9168289b4d0c034da94025121d33ad8643663454885032d77640e3d",
                         "bitcoinDescriptor": "wpkh(xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8/0/*)"
