@@ -153,24 +153,24 @@ def test_signature_func(obj, name, case, req, exp, error):
 
 def test_ecdsa_adaptor_func(obj, name, case, req, exp, error):
     try:
-        _proof = ''
-        if name == 'EcdsaAdaptor.Adapt':
-            resp = EcdsaAdaptor.adapt(req['signature'], req['secret'])
+        if name == 'EcdsaAdaptor.Decrypt':
+            sig = EcdsaAdaptor(req['signature'])
+            resp = sig.decrypt(req['secret'])
 
-        elif name == 'EcdsaAdaptor.ExtractSecret':
-            resp = EcdsaAdaptor.extract_secret(
-                req['adaptorSignature'], req['signature'], req['adaptor'])
+        elif name == 'EcdsaAdaptor.Recover':
+            sig = EcdsaAdaptor(req['adaptorSignature'])
+            resp = sig.recover(req['signature'], req['encryptionKey'])
 
-        elif name == 'EcdsaAdaptor.Sign':
-            resp, _proof = EcdsaAdaptor.sign(req['message'], req['privkey'],
-                                             req['adaptor'],
-                                             is_message_hashed=req['isHashed'])
+        elif name == 'EcdsaAdaptor.Encrypt':
+            resp = EcdsaAdaptor.encrypt(req['message'], req['privkey'],
+                                        req['encryptionKey'],
+                                        is_message_hashed=req['isHashed'])
 
         elif name == 'EcdsaAdaptor.Verify':
-            resp = EcdsaAdaptor.verify(req['signature'], req['proof'],
-                                       req['adaptor'], req['message'],
-                                       req['pubkey'],
-                                       is_message_hashed=req['isHashed'])
+            sig = EcdsaAdaptor(req['signature'])
+            resp = sig.verify(req['message'], req['pubkey'],
+                              req['encryptionKey'],
+                              is_message_hashed=req['isHashed'])
         else:
             raise Exception('unknown name: ' + name)
         assert_error(obj, name, case, error)
@@ -178,7 +178,6 @@ def test_ecdsa_adaptor_func(obj, name, case, req, exp, error):
         assert_equal(obj, name, case, exp, str(resp), 'signature')
         assert_equal(obj, name, case, exp, str(resp), 'secret')
         assert_equal(obj, name, case, exp, resp, 'valid')
-        assert_equal(obj, name, case, exp, _proof, 'proof')
 
     except CfdError as err:
         if not error:
