@@ -1,9 +1,10 @@
 from unittest import TestCase
 from tests.util import load_json_file, get_json_file,\
     exec_test, assert_equal, assert_match, assert_error
-from cfd.util import CfdError
+from cfd.util import CfdError, set_custom_prefix, clear_custom_prefix
 from cfd.key import Privkey
 from cfd.hdwallet import HDWallet, ExtPrivkey, ExtPubkey, Extkey
+import json
 import unicodedata
 
 
@@ -342,3 +343,64 @@ class TestHDWallet(TestCase):
 
     def test_pubkey_from_extkey(self):
         exec_test(self, 'Extkey.GetPubkeyFromExtkey', test_extkey_func)
+
+    def test_custom_prefix(self):
+        try:
+            json_dict = {
+                'addressJsonDatas': [
+                    {
+                        'nettype': 'liquidv1',
+                        'p2pkh': '39',
+                        'p2sh': '27',
+                        'bech32': 'ex',
+                        'blinded': '0c',
+                        'blech32': 'lq',
+                    },
+                    {
+                        'nettype': 'elementsregtest',
+                        'p2pkh': 'eb',
+                        'p2sh': '4b',
+                        'bech32': 'ert',
+                        'blinded': '04',
+                        'blindedP2sh': '04',
+                        'blech32': 'el',
+                    },
+                ],
+                'keyJsonDatas': [
+                    {
+                        'IsMainnet': 'true',
+                        'wif': '80',
+                        'bip32xpub': '0488b21e',
+                        'bip32xprv': '0488ade4',
+                        'bip49ypub': '049d7cb2',
+                        'bip49yprv': '049d7878',
+                        'bip84zpub': '04b24746',
+                        'bip84zprv': '04b2430c',
+                    },
+                    {
+                        'IsMainnet': 'false',
+                        'wif': 'ef',
+                        'bip32xpub': '043587cf',
+                        'bip32xprv': '04358394',
+                        'bip49ypub': '044a5262',
+                        'bip49yprv': '044a4e28',
+                        'bip84zpub': '045f1cf6',
+                        'bip84zprv': '045f18bc',
+                    },
+                ],
+            }
+            json_str = json.dumps(json_dict)
+            set_custom_prefix(json_str)
+
+            # check
+            xprv = ExtPrivkey(
+                'xprv9s21ZrQH143K2gA81bYFHqU68xz1cX2APaSq5tt6MFSLeXnCKV1RVUJt9FWNTbrrryem4ZckN8k4Ls1H6nwdvDTvnV7zEXs2HgPezuVccsq')  # noqa: E501
+            xpub = xprv.get_extpubkey()
+            self.assertEqual(
+                'xpub661MyMwAqRbcFAEb7d5FeyQpgzpW1yk1koNRtHHhuayKXL7Ls2Kg3GdMzWHSDAfpkzzxKfB9pDHeF8iWTcnovFuJ4DYPBbPBWq7oUFW31LB',  # noqa: E501
+                str(xpub), 'xpub')
+
+            clear_custom_prefix()
+        except CfdError as err:
+            clear_custom_prefix()
+            self.assertEqual('', err.message, 'exception')
