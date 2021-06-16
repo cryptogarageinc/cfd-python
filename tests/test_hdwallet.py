@@ -26,7 +26,7 @@ def test_mnemonic_word_list_func(obj, name, case, req, exp, error):
 
 def test_convert_mnemonic_func(obj, name, case, req, exp, error):
     try:
-        if 'file' in exp:
+        if ('file' in exp) and ('language' in exp):
             test_data_list = obj.mnemonic_test_data[exp['language']]
             results = []
             for test_data in test_data_list:
@@ -65,6 +65,21 @@ def test_convert_mnemonic_func(obj, name, case, req, exp, error):
                     assert_match(obj, name, case, test_data['xpriv'],
                                  results[index], index)
 
+        elif 'file' in exp:
+            test_data_list = obj.bip32_test_data['tests']
+            results = []
+            for test_data in test_data_list:
+                if name == 'HDWallet.GetExtPrivkeyFromSeed':
+                    resp = HDWallet.from_seed(
+                        test_data['seed'], test_data['network'])
+                    results.append(str(resp.ext_privkey))
+
+            for index, test_data in enumerate(test_data_list):
+                if name == 'HDWallet.GetExtPrivkeyFromSeed':
+                    assert_match(obj, name, case,
+                                 test_data['chain']['extPrivkey'],
+                                 results[index], index)
+
         else:
             if name == 'HDWallet.GetMnemonicFromEntropy':
                 resp = HDWallet.get_mnemonic(req['entropy'], req['language'])
@@ -76,7 +91,8 @@ def test_convert_mnemonic_func(obj, name, case, req, exp, error):
                     req['mnemonic'], req['language'], req['passphrase'],
                     strict_check=strict_check)
             elif name == 'HDWallet.GetExtPrivkeyFromSeed':
-                resp = HDWallet.from_seed(req['seed'], req['network'])
+                resp = HDWallet.from_seed(req['seed'], req['network'],
+                                          req.get('bip32FormatType', 'bip32'))
             else:
                 raise Exception('unsupported route: ' + name)
         assert_error(obj, name, case, error)
@@ -186,7 +202,7 @@ def test_extkey_func(obj, name, case, req, exp, error):
         _path = ''
         number = req.get('childNumber', 0)
         if number >= 0 and req.get('hardened', False) is True:
-            number += 0x80000000
+            number |= 0x80000000
 
         if name in ['Extkey.CreateExtkeyFromParent',
                     'Extkey.CreateExtkeyFromParentPath']:
@@ -217,7 +233,8 @@ def test_extkey_func(obj, name, case, req, exp, error):
                 key=req['key'],
                 chain_code=req['chainCode'],
                 depth=req['depth'],
-                number=number)
+                number=number,
+                format_type=req.get('bip32FormatType', 'bip32'))
 
         elif name == 'Extkey.GetExtkeyPathData':
             if 'privkey' in case:

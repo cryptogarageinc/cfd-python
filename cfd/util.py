@@ -576,7 +576,9 @@ class CfdUtil:
         ("CfdPrivkeyTweakMul", c_int, [c_void_p, c_char_p, c_char_p, c_char_p_p]),  # noqa: E501
         ("CfdNegatePrivkey", c_int, [c_void_p, c_char_p, c_char_p_p]),  # noqa: E501
         ("CfdCreateExtkeyFromSeed", c_int, [c_void_p, c_char_p, c_int, c_int, c_char_p_p]),  # noqa: E501
+        ("CfdCreateExtkeyByFormatFromSeed", c_int, [c_void_p, c_char_p, c_int, c_int, c_int, c_char_p_p]),  # noqa: E501
         ("CfdCreateExtkey", c_int, [c_void_p, c_int, c_int, c_char_p, c_char_p, c_char_p, c_char_p, c_ubyte, c_uint32, c_char_p_p]),  # noqa: E501
+        ("CfdCreateExtkeyByFormat", c_int, [c_void_p, c_int, c_int, c_char_p, c_char_p, c_char_p, c_char_p, c_ubyte, c_uint32, c_int, c_char_p_p]),  # noqa: E501
         ("CfdCreateExtkeyFromParent", c_int, [c_void_p, c_char_p, c_uint32, c_bool, c_int, c_int, c_char_p_p]),  # noqa: E501
         ("CfdCreateExtkeyFromParentPath", c_int, [c_void_p, c_char_p, c_char_p, c_int, c_int, c_char_p_p]),  # noqa: E501
         ("CfdCreateExtPubkey", c_int, [c_void_p, c_char_p, c_int, c_char_p_p]),  # noqa: E501
