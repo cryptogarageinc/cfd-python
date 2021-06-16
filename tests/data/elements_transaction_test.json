@@ -7313,10 +7313,7 @@
                     }
                 },
                 "error": {
-                    "code": 1,
-                    "type": "illegal_argument",
-                    "message": "Error WIF to Private key.",
-                    "capi": "Illegal online key error."
+                    "cfd": "Illegal online key error."
                 }
             },
             {
@@ -7531,10 +7528,7 @@
                     }
                 },
                 "error": {
-                    "code": 1,
-                    "type": "illegal_argument",
-                    "json": "Error WIF to Private key.",
-                    "message": "bitcoin_descriptor is not of any type supported: pkh(<xpub>)"
+                    "cfd": "bitcoin_descriptor is not of any type supported: pkh(<xpub>)"
                 }
             }
         ]
