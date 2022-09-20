@@ -11,6 +11,7 @@ if [ ! -d ${WORK_DIR} ]; then
 fi
 
 cd ${WORKDIR_PATH}
+pwd
 rm -rf bitcoind_datadir
 
 mkdir bitcoind_datadir

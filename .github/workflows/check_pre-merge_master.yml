@@ -15,8 +15,8 @@ on:
     - stable_v*
 
 env:
-  GITHUB_VERSION: v0.0.6-local.10
-  GITHUB_BITCOIN_VERSION: v0.0.6-local.10
+  GITHUB_VERSION: v0.0.6-local.11
+  GITHUB_BITCOIN_VERSION: v0.0.6-local.11
   DOCKER_PYTHON_VERSION: '3.10'
   GITHUB_DOCKER_IMAGE: ghcr.io/ko-matsu/elements-testing
   ENTRYPOINT_PATH: /github/workspace/.github/workflows/docker/test_entrypoint.sh
