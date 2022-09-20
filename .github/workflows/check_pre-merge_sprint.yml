@@ -85,7 +85,7 @@ jobs:
       run: |
         docker login docker.pkg.github.com -u owner -p ${{ secrets.GITHUB_TOKEN }}
         docker pull ${{ env.GITHUB_DOCKER_IMAGE }}:${{ env.GITHUB_VERSION }}
-        docker run -v ${{ github.workspace }}:/github/workspace --entrypoint ${{ env.ENTRYPOINT_PATH }} ${{ env.GITHUB_DOCKER_IMAGE }}:${{ env.GITHUB_VERSION }}
+        docker run --user=testuser -v ${{ github.workspace }}:/github/workspace --entrypoint ${{ env.ENTRYPOINT_PATH }} ${{ env.GITHUB_DOCKER_IMAGE }}:${{ env.GITHUB_VERSION }}
 
   bitcoin-e2e-test:
     timeout-minutes: 20
@@ -109,7 +109,7 @@ jobs:
       run: |
         docker login docker.pkg.github.com -u owner -p ${{ secrets.GITHUB_TOKEN }}
         docker pull ${{ env.GITHUB_DOCKER_IMAGE }}:${{ env.GITHUB_BITCOIN_VERSION }}
-        docker run -v ${{ github.workspace }}:/github/workspace --entrypoint ${{ env.BITCOIN_ENTRYPOINT_PATH }} ${{ env.GITHUB_DOCKER_IMAGE }}:${{ env.GITHUB_BITCOIN_VERSION }}
+        docker run --user=testuser -v ${{ github.workspace }}:/github/workspace --entrypoint ${{ env.BITCOIN_ENTRYPOINT_PATH }} ${{ env.GITHUB_DOCKER_IMAGE }}:${{ env.GITHUB_BITCOIN_VERSION }}
 
   doxygen-ubuntu:
     name: doxygen-ubuntu
