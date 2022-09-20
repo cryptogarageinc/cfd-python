@@ -15,7 +15,7 @@ on:
 env:
   GITHUB_VERSION: v0.0.6-local.10
   GITHUB_BITCOIN_VERSION: v0.0.6-local.10
-  DOCKER_PYTHON_VERSION: 3.10
+  DOCKER_PYTHON_VERSION: '3.10'
   GITHUB_DOCKER_IMAGE: ghcr.io/ko-matsu/elements-testing
   ENTRYPOINT_PATH: /github/workspace/.github/workflows/docker/test_entrypoint.sh
   BITCOIN_ENTRYPOINT_PATH: /github/workspace/.github/workflows/docker/test_bitcoin_entrypoint.sh
@@ -48,6 +48,7 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.py-ver }}
+        architecture: x64
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
     - name: build
@@ -73,6 +74,7 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ env.DOCKER_PYTHON_VERSION }}
+        architecture: x64
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
     - name: install pip
@@ -96,6 +98,7 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ env.DOCKER_PYTHON_VERSION }}
+        architecture: x64
     - name: Display Python version
       run: python -c "import sys; print(sys.version)"
     - name: install pip
